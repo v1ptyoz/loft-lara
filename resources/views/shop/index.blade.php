@@ -32,8 +32,19 @@
             </div>
           </div>
           <div class="authorization-block">
-              <a href="/register" class="authorization-block__link">Регистрация</a>
-              <a href="/login" class="authorization-block__link">Войти</a>
+              @auth
+                  <a href="/orders" class="authorization-block__link" title="Мои заказы">{{auth()->user()->name}}</a>
+                  <a href="#" class="authorization-block__link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      Выйти
+                  </a>
+                  <form id="logout-form" action="/logout" method="POST">
+                      @csrf
+                  </form>
+              @endauth
+              @guest
+                  <a href="/register" class="authorization-block__link">Регистрация</a>
+                  <a href="/login" class="authorization-block__link">Войти</a>
+              @endguest
           </div>
         </div>
       </header>

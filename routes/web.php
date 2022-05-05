@@ -33,4 +33,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/logout', '\App\Http\Controllers\Auth\Controller@destroy');
+
 require __DIR__.'/auth.php';

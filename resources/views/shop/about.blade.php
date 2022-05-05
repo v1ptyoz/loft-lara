@@ -31,8 +31,21 @@
               <div class="payment-basket__status__basket"><span class="payment-basket__status__basket-value">0</span><span class="payment-basket__status__basket-value-descr">товаров</span></div>
             </div>
           </div>
-          <div class="authorization-block"><a href="#" class="authorization-block__link">Регистрация</a><a href="#" class="authorization-block__link">Войти</a></div>
-        </div>
+            <div class="authorization-block">
+                @auth
+                    <a href="/orders" class="authorization-block__link" title="Мои заказы">{{auth()->user()->name}}</a>
+                    <a href="#" class="authorization-block__link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Выйти
+                    </a>
+                    <form id="logout-form" action="/logout" method="POST">
+                        @csrf
+                    </form>
+                @endauth
+                @guest
+                    <a href="/register" class="authorization-block__link">Регистрация</a>
+                    <a href="/login" class="authorization-block__link">Войти</a>
+                @endguest
+            </div>        </div>
       </header>
       <div class="middle">
         <div class="sidebar">
