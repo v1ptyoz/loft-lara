@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +38,17 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\Controller@destroy');
+
+Route::get('/admin', [AdminController::class, 'index'])->middleware('isAdmin');
+
+Route::get('/admin/categories', [CategoryController::class, 'index'])->name("admin.categories")->middleware('isAdmin');
+Route::post('/admin/category', [CategoryController::class, 'create'])->name("category.create")->middleware('isAdmin');
+Route::post('/admin/category/edit/{id}', [CategoryController::class, 'edit'])->name("category.edit")->middleware('isAdmin');
+Route::post('/admin/category/delete/{id}', [CategoryController::class, 'delete'])->name("category.delete")->middleware('isAdmin');
+
+Route::get('/admin/items', [ItemController::class, 'items'])->name("admin.items")->middleware('isAdmin');
+Route::get('/admin/orders', [OrderController::class, 'orders'])->name("admin.orders")->middleware('isAdmin');
+
+
 
 require __DIR__.'/auth.php';

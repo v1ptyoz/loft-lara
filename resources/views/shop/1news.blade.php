@@ -33,7 +33,11 @@
           </div>
             <div class="authorization-block">
                 @auth
-                    <a href="/orders" class="authorization-block__link" title="Мои заказы">{{auth()->user()->name}}</a>
+                    @if(Auth::user()->isAdmin)
+                        <a href="/admin" class="authorization-block__link" style="color: red;" title="Админка">{{Auth::user()->name}}</a>
+                    @else
+                        <a href="/orders" class="authorization-block__link" title="Мои заказы">{{Auth::user()->name}}</a>
+                    @endif
                     <a href="#" class="authorization-block__link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Выйти
                     </a>

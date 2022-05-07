@@ -34,7 +34,7 @@
           <div class="authorization-block">
               @auth
                   @if(Auth::user()->isAdmin)
-                  <a href="/orders" class="authorization-block__link" style="color: red;" title="Мои заказы">{{Auth::user()->name}}</a>
+                  <a href="/admin" class="authorization-block__link" style="color: red;" title="Админка">{{Auth::user()->name}}</a>
                   @else
                       <a href="/orders" class="authorization-block__link" title="Мои заказы">{{Auth::user()->name}}</a>
                   @endif
