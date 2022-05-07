@@ -9,10 +9,11 @@ class Item extends Model {
         "name",
         "price",
         "photo",
-        "text"
+        "text",
+        "category_id"
     ];
 
-    public function categories() {
-        return $this->belongsToMany(Category::class, 'category_item');
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

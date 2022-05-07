@@ -39,14 +39,18 @@ Route::get('/dashboard', function () {
 
 Route::get('/logout', '\App\Http\Controllers\Auth\Controller@destroy');
 
-Route::get('/admin', [AdminController::class, 'index'])->middleware('isAdmin');
+Route::get('/admin', [AdminController::class, 'index'])->middleware('isAdmin')->name('admin.index');
 
 Route::get('/admin/categories', [CategoryController::class, 'index'])->name("admin.categories")->middleware('isAdmin');
 Route::post('/admin/category', [CategoryController::class, 'create'])->name("category.create")->middleware('isAdmin');
 Route::post('/admin/category/edit/{id}', [CategoryController::class, 'edit'])->name("category.edit")->middleware('isAdmin');
 Route::post('/admin/category/delete/{id}', [CategoryController::class, 'delete'])->name("category.delete")->middleware('isAdmin');
 
-Route::get('/admin/items', [ItemController::class, 'items'])->name("admin.items")->middleware('isAdmin');
+Route::get('/admin/items', [ItemController::class, 'index'])->name("admin.items")->middleware('isAdmin');
+Route::post('/admin/item', [ItemController::class, 'create'])->name("item.create")->middleware('isAdmin');
+Route::post('/admin/item/edit/{id}', [ItemController::class, 'edit'])->name("item.edit")->middleware('isAdmin');
+Route::post('/admin/item/delete/{id}', [ItemController::class, 'delete'])->name("item.delete")->middleware('isAdmin');
+
 Route::get('/admin/orders', [OrderController::class, 'orders'])->name("admin.orders")->middleware('isAdmin');
 
 

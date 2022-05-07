@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string("text");
             $table->unsignedInteger("price");
             $table->string("photo");
-            $table->string("text");
+            $table->integer("category_id")->unsigned()->default(0);
             $table->timestamps();
         });
     }

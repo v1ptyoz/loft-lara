@@ -69,7 +69,7 @@
         <li class="category-item">
             <form class="edit-form" method="POST" action={{route('category.edit', ["id" => $category->id])}}>
                 @csrf
-                <input type="name" name="name" value={{$category->name}}>
+                <input type="text" name="name" value={{$category->name}}>
                 <textarea type="text" name="text">{{$category->text}}</textarea>
                 <input type="submit" value="Сохранить">
             </form>
@@ -81,3 +81,4 @@
         @endforeach
     </ul>
 </main>
+<a href={{route('admin.index')}}>Вернуться в админку</a>
