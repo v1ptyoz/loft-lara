@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="css/libs.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/media.css">
+      <link rel="stylesheet" href={{ asset('css/libs.min.css') }}>
+      <link rel="stylesheet" href={{ asset('css/main.css') }}>
+      <link rel="stylesheet" href={{ asset('css/media.css') }}>
   </head>
   <body>
     <div class="main-wrapper">
@@ -49,20 +49,19 @@
                     <a href="/register" class="authorization-block__link">Регистрация</a>
                     <a href="/login" class="authorization-block__link">Войти</a>
                 @endguest
-            </div>        </div>
+            </div>
+        </div>
       </header>
       <div class="middle">
         <div class="sidebar">
           <div class="sidebar-item">
             <div class="sidebar-item__title">Категории</div>
             <div class="sidebar-item__content">
-              <ul class="sidebar-category">
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Action</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">RPG</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Квесты</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Онлайн-игры</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Стратегии</a></li>
-              </ul>
+                <ul class="sidebar-category">
+                    @foreach($categories as $category)
+                        <li class="sidebar-category__item"><a href={{route("shop.show.category", ["element" => $category])}} class="sidebar-category__item__link">{{$category->name}}</a></li>
+                    @endforeach
+                </ul>
             </div>
           </div>
           <div class="sidebar-item">
@@ -93,7 +92,7 @@
           <div class="content-middle">
             <div class="content-head__container">
               <div class="content-head__title-wrap">
-                <div class="content-head__title-wrap__title bcg-title">Игры в разделе action</div>
+                <div class="content-head__title-wrap__title bcg-title">Игры в разделе {{$element->name}}</div>
               </div>
               <div class="content-head__search-block">
                 <div class="search-container">
@@ -106,36 +105,13 @@
             </div>
             <div class="content-main__container">
               <div class="products-category__list">
-                <div class="products-category__list__item">
-                  <div class="products-category__list__item__title-product"><a href="#">Batman - Telltale Game Series</a></div>
-                  <div class="products-category__list__item__thumbnail"><a href="#" class="products-category__list__item__thumbnail__link"><img src="img/cover/game-6.jpg" alt="Preview-image"></a></div>
-                  <div class="products-category__list__item__description"><span class="products-price">400 руб.</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-category__list__item">
-                  <div class="products-category__list__item__title-product"><a href="#">Deus Ex: Mankind Divided</a></div>
-                  <div class="products-category__list__item__thumbnail"><a href="#" class="products-category__list__item__thumbnail__link"><img src="img/cover/game-3.jpg" alt="Preview-image"></a></div>
-                  <div class="products-category__list__item__description"><span class="products-price">400 руб.</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-category__list__item">
-                  <div class="products-category__list__item__title-product"><a href="#">The Witcher 3: Wild Hunt</a></div>
-                  <div class="products-category__list__item__thumbnail"><a href="#" class="products-category__list__item__thumbnail__link"><img src="img/cover/game-1.jpg" alt="Preview-image"></a></div>
-                  <div class="products-category__list__item__description"><span class="products-price">400 руб.</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-category__list__item">
-                  <div class="products-category__list__item__title-product"><a href="#">Rocket League</a></div>
-                  <div class="products-category__list__item__thumbnail"><a href="#" class="products-category__list__item__thumbnail__link"><img src="img/cover/game-7.jpg" alt="Preview-image"></a></div>
-                  <div class="products-category__list__item__description"><span class="products-price">400 руб.</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-category__list__item">
-                  <div class="products-category__list__item__title-product"><a href="#">Dishonored 2</a></div>
-                  <div class="products-category__list__item__thumbnail"><a href="#" class="products-category__list__item__thumbnail__link"><img src="img/cover/game-8.jpg" alt="Preview-image"></a></div>
-                  <div class="products-category__list__item__description"><span class="products-price">400 руб.</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-category__list__item">
-                  <div class="products-category__list__item__title-product"><a href="#">This War of Mine</a></div>
-                  <div class="products-category__list__item__thumbnail"><a href="#" class="products-category__list__item__thumbnail__link"><img src="img/cover/game-9.jpg" alt="Preview-image"></a></div>
-                  <div class="products-category__list__item__description"><span class="products-price">400 руб.</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
+                @foreach($items as $item)
+                  <div class="products-category__list__item">
+                      <div class="products-category__list__item__title-product"><a href={{route("shop.show.item", ["element" => $item])}}>{{$item->name}}</a></div>
+                      <div class="products-category__list__item__thumbnail"><a href={{route("shop.show.item", ["element" => $item])}} class="products-category__list__item__thumbnail__link"><img src={{asset($item->photo)}} alt="Preview-image"></a></div>
+                      <div class="products-category__list__item__description"><span class="products-price">{{$item->price}} руб.</span><a href={{route("shop.buy", ["id"=>$item->id])}} class="btn btn-blue">Купить</a></div>
+                  </div>
+                @endforeach
               </div>
             </div>
             <div class="content-footer__container">

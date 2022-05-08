@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="css/libs.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href={{ asset('css/libs.min.css') }}>
+    <link rel="stylesheet" href={{ asset('css/main.css') }}>
+    <link rel="stylesheet" href={{ asset('css/media.css') }}>
   </head>
   <body>
     <div class="main-wrapper">
       <header class="main-header">
-        <div class="logotype-container"><a href="#" class="logotype-link"><img src="img/logo.png" alt="Логотип"></a></div>
+        <div class="logotype-container"><a href="#" class="logotype-link"><img src={{asset("img/logo.png")}} alt="Логотип"></a></div>
         <nav class="main-navigation">
           <ul class="nav-list">
               <li class="nav-list__item"><a href="/" class="nav-list__item__link">Главная</a></li>
@@ -56,13 +56,11 @@
           <div class="sidebar-item">
             <div class="sidebar-item__title">Категории</div>
             <div class="sidebar-item__content">
-              <ul class="sidebar-category">
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Action</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">RPG</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Квесты</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Онлайн-игры</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Стратегии</a></li>
-              </ul>
+                <ul class="sidebar-category">
+                    @foreach($categories as $category)
+                        <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">{{$category->name}}</a></li>
+                    @endforeach
+                </ul>
             </div>
           </div>
           <div class="sidebar-item">
@@ -88,12 +86,12 @@
         <div class="main-content">
           <div class="content-top">
             <div class="content-top__text">Купить игры неборого без регистрации смс с торента, получить компкт диск, скачать Steam игры после оплаты</div>
-            <div class="image-container"><img src="img/slider.png" alt="Image" class="image-main"></div>
+            <div class="image-container"><img src={{asset("img/slider.png")}} alt="Image" class="image-main"></div>
           </div>
           <div class="content-middle">
             <div class="content-head__container">
               <div class="content-head__title-wrap">
-                <div class="content-head__title-wrap__title bcg-title">The Witcher 3: Wild Hunt в разделе action</div>
+                <div class="content-head__title-wrap__title bcg-title">{{$element->name}} в разделе {{$element->category->name ?? " "}} </div>
               </div>
               <div class="content-head__search-block">
                 <div class="search-container">
@@ -106,31 +104,18 @@
             </div>
             <div class="content-main__container">
               <div class="product-container">
-                <div class="product-container__image-wrap"><img src="img/cover/game-1.jpg" class="image-wrap__image-product"></div>
+                <div class="product-container__image-wrap"><img src={{asset($element->photo)}} class="image-wrap__image-product"></div>
                 <div class="product-container__content-text">
-                  <div class="product-container__content-text__title">SuperMario</div>
+                  <div class="product-container__content-text__title">{{$element->name}}</div>
                   <div class="product-container__content-text__price">
                     <div class="product-container__content-text__price__value">
-                      Цена: <b>400</b>
+                      Цена: <b>{{$element->price}}</b>
                       руб
-                    </div><a href="#" class="btn btn-blue">Купить</a>
+                    </div><a href={{route("shop.buy", ["id"=>$element->id])}} class="btn btn-blue">Купить</a>
                   </div>
                   <div class="product-container__content-text__description">
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                      in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                      deserunt mollit anim id est laborum. Sed ut perspiciatis
-                      unde omnis iste natus error sit voluptatem
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                      minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                        {{$element->text}}
                     </p>
                   </div>
                 </div>
@@ -146,21 +131,13 @@
             </div>
             <div class="content-main__container">
               <div class="products-columns">
-                <div class="products-columns__item">
-                  <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">The Witcher 3: Wild Hunt</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-1.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                  <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-columns__item">
-                  <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">Overwatch</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-2.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                  <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-columns__item">
-                  <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">Deus Ex: Mankind Divided</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-3.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                  <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
+                  @foreach($items as $item)
+                      <div class="products-columns__item">
+                          <div class="products-columns__item__title-product"><a href={{route("shop.show.item", ["element" => $item])}} class="products-columns__item__title-product__link">{{$item->name}}</a></div>
+                          <div class="products-columns__item__thumbnail"><a href={{route("shop.show.item", ["element" => $item])}} class="products-columns__item__thumbnail__link"><img src={{asset($item->photo)}} alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
+                          <div class="products-columns__item__description"><span class="products-price">{{$item->price}} руб</span><a class="btn btn-blue" href={{route("shop.buy", ["id"=>$item->id])}}>Купить</a></div>
+                      </div>
+                  @endforeach
               </div>
             </div>
           </div>

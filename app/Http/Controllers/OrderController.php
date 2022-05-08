@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Item;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -11,8 +13,6 @@ class OrderController extends Controller
     public function index() {
         return view("admin.orders", ["orders" => Order::all()]);
     }
-
-    public function create() {}
 
     public function edit() {}
 

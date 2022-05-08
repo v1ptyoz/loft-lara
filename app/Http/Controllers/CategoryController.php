@@ -43,4 +43,8 @@ class CategoryController extends Controller
         return view("admin.categories", ["categories" => Category::all()]);
     }
 
+    public function show(Category $element) {
+        return view("shop/category", ["element" => $element, "items" => $element->items()->get(), "categories" => Category::all()]);
+    }
+
 }

@@ -72,4 +72,8 @@ class ItemController extends Controller
         Item::find($request->id)->delete();
         return view("admin.items", ["items" => Item::all(), "categories"=> Category::all()]);
     }
+
+    public function show(Item $element) {
+        return view("shop/1product", ["element" => $element, "items" => Item::all(), "categories" => Category::all()]);
+    }
 }

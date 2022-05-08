@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="css/libs.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/media.css">
+      <link rel="stylesheet" href={{ asset('css/libs.min.css') }}>
+      <link rel="stylesheet" href={{ asset('css/main.css') }}>
+      <link rel="stylesheet" href={{ asset('css/media.css') }}>
   </head>
   <body>
     <div class="main-wrapper">
@@ -58,11 +58,9 @@
             <div class="sidebar-item__title">Категории</div>
             <div class="sidebar-item__content">
               <ul class="sidebar-category">
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Action</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">RPG</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Квесты</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Онлайн-игры</a></li>
-                <li class="sidebar-category__item"><a href="#" class="sidebar-category__item__link">Стратегии</a></li>
+                @foreach($categories as $category)
+                <li class="sidebar-category__item"><a href={{route("shop.show.category", ["element" => $category])}} class="sidebar-category__item__link">{{$category->name}}</a></li>
+                @endforeach
               </ul>
             </div>
           </div>
@@ -107,36 +105,13 @@
             </div>
             <div class="content-main__container">
               <div class="products-columns">
-                <div class="products-columns__item">
-                  <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">The Witcher 3: Wild Hunt</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-1.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                  <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-columns__item">
-                  <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">Overwatch</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-2.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                  <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-columns__item">
-                  <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">Deus Ex: Mankind Divided</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-3.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                  <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-columns__item">
-                  <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">World of WarCraft</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-4.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                  <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-columns__item">
-                  <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">Call of Duty: Black ops II</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-5.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                  <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
-                <div class="products-columns__item">
-                  <div class="products-columns__item__title-product"><a href="#" class="products-columns__item__title-product__link">Batman</a></div>
-                  <div class="products-columns__item__thumbnail"><a href="#" class="products-columns__item__thumbnail__link"><img src="img/cover/game-6.jpg" alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
-                  <div class="products-columns__item__description"><span class="products-price">400 руб</span><a href="#" class="btn btn-blue">Купить</a></div>
-                </div>
+                @foreach($items as $item)
+                  <div class="products-columns__item">
+                      <div class="products-columns__item__title-product"><a href={{route("shop.show.item", ["element" => $item])}} class="products-columns__item__title-product__link">{{$item->name}}</a></div>
+                      <div class="products-columns__item__thumbnail"><a href={{route("shop.show.item", ["element" => $item])}} class="products-columns__item__thumbnail__link"><img src={{$item->photo}} alt="Preview-image" class="products-columns__item__thumbnail__img"></a></div>
+                      <div class="products-columns__item__description"><span class="products-price">{{$item->price}} руб</span><a class="btn btn-blue" href={{route("shop.buy", ["id"=>$item->id])}}>Купить</a></div>
+                  </div>
+                @endforeach
               </div>
             </div>
             <div class="content-footer__container">
