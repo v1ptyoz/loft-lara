@@ -8,6 +8,8 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderNotification;
 
 class ShopController extends Controller
 {
@@ -26,6 +28,8 @@ class ShopController extends Controller
 
         $order->items()->attach($request->item, ["order_id" => $order->id, "created_at" => $order->created_at]);
         $order->save();
+
+        Mail::to(env("MAIL_USERNAME"))->send(new OrderNotification($order));
 
         return view("shop.success", ["id" => $order->id]);
     }
