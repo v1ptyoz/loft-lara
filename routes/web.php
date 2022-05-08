@@ -51,7 +51,10 @@ Route::post('/admin/item', [ItemController::class, 'create'])->name("item.create
 Route::post('/admin/item/edit/{id}', [ItemController::class, 'edit'])->name("item.edit")->middleware('isAdmin');
 Route::post('/admin/item/delete/{id}', [ItemController::class, 'delete'])->name("item.delete")->middleware('isAdmin');
 
-Route::get('/admin/orders', [OrderController::class, 'orders'])->name("admin.orders")->middleware('isAdmin');
+Route::get('/admin/orders', [OrderController::class, 'index'])->name("admin.orders")->middleware('isAdmin');
+Route::post('/admin/orders/edit/{id}', [OrderController::class, 'edit'])->name("order.edit")->middleware('isAdmin');
+Route::post('/admin/orders/delete/{id}', [OrderController::class, 'delete'])->name("order.delete")->middleware('isAdmin');
+
 
 
 

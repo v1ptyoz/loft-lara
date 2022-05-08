@@ -123,3 +123,4 @@
         @endforeach
     </ul>
 </main>
+<a href={{route('admin.index')}}>Вернуться в админку</a>

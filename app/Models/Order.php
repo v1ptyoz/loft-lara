@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model {
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class, "id", "user_id");
     }
 
     public function items() {
-        return $this->belongsToMany(Item::class, 'order_item');
+        return $this->belongsToMany(Item::class, 'orders_items');
     }
 }
